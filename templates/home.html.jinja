@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    {% if user_name != ''%}
+    <p> Hola {{user_name}}</p>
+    {%else%}
+    <p> Please Sign In or Sign up</p>
+    {%endif%}
+</body>
+</html>
