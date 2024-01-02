@@ -26,16 +26,26 @@
         }
         #list{
             background-color: #151232;
-
+            border-radius: 8px;
+        }
+        #title{
+            background-color: #232946;
+            border-radius: 8px;
+        }
+        hr{
+            border: 1px solid #8bd3dd;
         }
     </style>
 </head>
 <body>
-    <h1>Todo List</h1>
     <div id="list">
+        <h1>Todo List</h1>
         <ul>
             {% for todo in todos_list%}
-            <li>{{todo}}</li>
+            <li>{{todo}} 
+            <form method="post" action="/delete_todo/{{loop.index0}}">
+            <input type="submit" value="Delete">
+            </form></li>
             <br>
             {%endfor%}
         </ul>
