@@ -42,7 +42,7 @@
         <h1>Todo List</h1>
         <ul>
             {% for todo in todos_list%}
-            <li>{{todo}} 
+            <li>{{todo['description']}} 
             <form method="post" action="/delete_todo/{{loop.index0}}">
             <input type="submit" value="Delete">
             </form></li>
