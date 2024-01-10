@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
         body {
-            background-color: #0f0e17;
+            background-color: rgb(2,0,36);
             color: white;
             font-family: 'Nunito', sans-serif;
             text-align: center;
@@ -16,6 +16,7 @@
             margin-right: auto;
             max-width: 1080px;
             margin-top: 8%;
+
         }
         ul {
             text-align: center;
@@ -23,10 +24,11 @@
         }
         li {
             text-align: center;
+
         }
         #list{
-            background-color: #151232;
-            border-radius: 8px;
+            background-color: #15192b;
+            border-radius: 15px;
         }
         #title{
             background-color: #232946;
@@ -35,24 +37,52 @@
         hr{
             border: 1px solid #8bd3dd;
         }
+        .complete{
+            text-decoration: line-through;
+            font-style: italic;
+        }
+        .bnSubmit{
+            border-radius: 8px;
+            background-color: purple;
+        }
+        #input{
+            k
+        }
     </style>
 </head>
 <body>
     <div id="list">
-        <h1>Todo List</h1>
+        <div id="title">
+            <h1>Todo List</h1>
+            <hr>
+        </div>
         <ul>
             {% for todo in todos_list%}
-            <li>{{todo['description']}} 
+            <li class="{% if todo['complete']%}complete{%endif%}">{{todo['description']}} 
+            {% if todo['complete']%}
+            🫵
+            {%endif%}
+            {% if todo['complete']%}
+            <form method="post" action="/uncomplete_todo/{{todo['id']}}">
+            <input type="submit" class="bnSubmit" value="Uncomplete">
+            </form>
+            {%endif%}
+            {% if todo['complete'] == 0%}
+            <form method="post" action="/complete_todo/{{todo['id']}}">
+            <input type="submit" class="bnSubmit" value="Complete">
+            </form>
+            {%endif%}
             <form method="post" action="/delete_todo/{{todo['id']}}">
-            <input type="submit" value="Delete">
-            </form></li>
+            <input type="submit" class="bnSubmit" value="Delete">
+            </form>
+            </li>
             <br>
             {%endfor%}
         </ul>
     </div>
     <form method="post">
-        <input name="new_todo">
-        <input type="submit">
+        <input name="new_todo" placeholder="Add New Todo!" id="input">
+        <input type="submit" class="bnSubmit">
     </form>
 </body>
 </html>
