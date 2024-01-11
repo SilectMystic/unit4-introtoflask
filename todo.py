@@ -1,18 +1,32 @@
 from flask import Flask, render_template, request, redirect
 import pymysql
 import pymysql.cursors
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+users = {
+    'hehe' : 'haha'
+}
 
 connection = pymysql.connect(
     database = 'cvasquez_todos',
     user = 'cvasquez',
-    password = '242590909',
+    password = '22590909',
     host = '10.100.33.60',
     cursorclass = pymysql.cursors.DictCursor
 )
 
+@auth.get_password
+def get_pw(username):
+    if username in users:
+        return users.get(username)
+    return None
+
 @app.route('/', methods=['GET','POST'])
+@auth.login_required
 def index():
     if request.method == 'POST':
         cursor = connection.cursor()
